@@ -1,6 +1,6 @@
 # stonksgame
-StonksGame:
-A Discord Bot for hosting live stock trading simulation contests. Bot Prefix: $
+StonksGame: A Discord Bot for hosting live stock trading simulation contests. Bot Prefix: $
+
 Commands/Categories:
 
 1. help - $help, gives a list of commands that the bot can do
