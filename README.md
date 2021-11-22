@@ -12,3 +12,4 @@ Commands/Categories:
     5. leaderboard/lb - $lb, gives the leaderboard of the Top 10 Traders according to net worth in the current game
     6. assets - $assets, returns the player's current assets, including stocks owned and net worth
 3. feedback - $feedback, gives feedback to the developers, done in DMs
+4. invite - $invite, gives link to invite the bot to other servers
