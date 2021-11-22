@@ -3,6 +3,9 @@ import discord
 import os
 import asyncio
 import datetime as dt
+from dotenv import load_dotenv
+
+load_dotenv(".env")
 client = commands.Bot(command_prefix='$', activity=discord.Game(name="Playing $help"))
-DISCORD_TOKEN = os.environ["DISCORD_TOKEN"]
-client.run(DISCORD_TOKEN)
+TOKEN = os.environ["TOKEN"]
+client.run(TOKEN)
