@@ -1,7 +1,8 @@
 # stonksgame
 StonksGame:
 A Discord Bot for hosting live stock trading simulation contests. Bot Prefix: $
-Command/Categories:
+Commands/Categories:
+
 1. help - $help, gives a list of commands that the bot can do
 2. game - Mechanics of Gameplay
     1. start - $start [time year=Y month=M day=D],  starts a trading game in the channel that lasts for the duration specified or by default 7 days(EX: $start 1M)
