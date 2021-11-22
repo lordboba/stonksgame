@@ -11,4 +11,4 @@ Commands/Categories:
     4. market/m - $market [4-Letter Stock Symbol], returns a message giving the current market price of a stock(EX: $market TSLA, will give $1,137.06, as of 11/21/2021)
     5. leaderboard/lb - $lb, gives the leaderboard of the Top 10 Traders according to net worth in the current game
     6. assets - $assets, returns the player's current assets, including stocks owned and net worth
-3. feedback - $feedback, gives feedback to the developers
+3. feedback - $feedback, gives feedback to the developers, done in DMs
