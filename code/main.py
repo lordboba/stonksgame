@@ -1,11 +1,15 @@
-from discord.ext import commands, tasks
-import discord
+#
 import os
 import asyncio
 import datetime as dt
-from dotenv import load_dotenv
+import discord
+from discord.ext import commands, tasks
 
-load_dotenv(".env")
+from dotenv import load_dotenv
+# print("hi my name is bob")
+load_dotenv()
 client = commands.Bot(command_prefix='$', activity=discord.Game(name="Playing $help"))
-TOKEN = os.environ["TOKEN"]
+
+print(os.environ.get("token"))
+TOKEN = os.environ["token"]
 client.run(TOKEN)
