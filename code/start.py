@@ -15,7 +15,7 @@ async def st(ctx, time:Optional[str]):
     # print(data)
     # print(type(ctx.channel.id))
     if str(ctx.channel.id) in data:
-        await ctx.send("There is already a game going on here. To start a new game, have a stonk-admin end the current game and make a new one.")
+        await ctx.send("There is already a game going on here. To start a new game, have a stonk-admin end the current game.")
     else:
         await ctx.send("Are you sure you want to start a stonk trading game here?", 
         components=[create_actionrow(create_button(style=ButtonStyle.green, label="Yes", custom_id="yea"), 

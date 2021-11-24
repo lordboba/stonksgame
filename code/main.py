@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 from typing import Optional
 from start import st, create_game
 from end import endG, shut_down
+from join import joined, add_user
 from discord_slash import SlashCommand
 from discord_slash.utils.manage_components import create_button, create_actionrow
 from discord_slash.model import ButtonStyle
@@ -75,5 +76,19 @@ async def no_cont(ctx: ComponentContext):
     # await ctx.send()
     await ctx.edit_origin(content="Alright, looks like we're not ending the game.",components=[])
 
+@client.command(name="join")
+async def join(ctx):
+    await joined(ctx)
+
+@slash.component_callback()
+async def yejoin(ctx: ComponentContext):
+    await ctx.edit_origin(content="Game successfully joined!.", components=[])
+    # print("Squid game")
+    await add_user(ctx)
+
+@slash.component_callback()
+async def nojoin(ctx: ComponentContext):
+    # await ctx.send()
+    await ctx.edit_origin(content="Looks like we're not joining this time.",components=[])
 TOKEN = os.environ["token"]
 client.run(TOKEN)
