@@ -31,11 +31,11 @@ async def add_user(ctx):
     data = json.loads(contents)
     data[channel]["Players"].append(id)
     player = {
-        "NetWorth" : 100000,
+        "NetWorth" : 100000.0,
         "Stocks": {},
-        "Cash": 100000
+        "Cash": 100000.0
     }
     data[channel]["PlayerData"][id] = player
-    data[channel]["LB"][id] = 100000
+    data[channel]["LB"][id] = 100000.0
     async with aiofiles.open("data.json",'w') as out:
         await out.write(json.dumps(data))

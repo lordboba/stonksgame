@@ -13,6 +13,8 @@ from start import st, create_game
 from end import endG, shut_down
 from join import joined, add_user
 from assets import items
+from buy import afford, addAsset, remBuy
+from market import markP
 from discord_slash import SlashCommand
 from discord_slash.utils.manage_components import create_button, create_actionrow
 from discord_slash.model import ButtonStyle
@@ -96,5 +98,30 @@ async def nojoin(ctx: ComponentContext):
 async def assets(ctx):
     await items(ctx)
 
+@client.command(name="buy")
+async def buy(ctx, Stock, Quantity):
+    await afford(ctx, Stock, Quantity, os.environ["key"])
+
+@client.command(name="b")
+async def b(ctx, Stock, Quantity):
+    await afford(ctx, Stock, Quantity, os.environ["key"])
+
+@slash.component_callback()
+async def yebuy(ctx: ComponentContext):
+    await ctx.edit_origin(content="Stocks bought!", components=[])
+    # print("Squid game")
+    await addAsset(ctx)
+
+@slash.component_callback()
+async def nobuy(ctx: ComponentContext):
+    # await ctx.send()
+    await ctx.edit_origin(content="Looks like we're not buying this.",components=[])
+    await remBuy(ctx)
+
+@client.command(name="market")
+async def market(ctx, Stock):
+    await markP(ctx, Stock, os.environ["key"])
+
+# print(os.environ["key"])
 TOKEN = os.environ["token"]
 client.run(TOKEN)

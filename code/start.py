@@ -36,7 +36,8 @@ async def create_game(ctx):
         "Players" : [],
         "PlayerData" : {},
         "LB" : {},
-        "EndTime" : new.strftime("%m/%d/%Y, %H:%M")
+        "EndTime" : new.strftime("%m/%d/%Y, %H:%M"),
+        "Buying" : {}
     }
     # print(data)
     async with aiofiles.open("data.json",'w') as out:
