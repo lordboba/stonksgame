@@ -13,7 +13,7 @@ async def endG(ctx):
     # print(data)
     # print(type(ctx.channel.id))
     if str(ctx.channel.id) not in data:
-        await ctx.send("There is no game currently going on in this channel.")
+        await ctx.send("There is no game currently going on in this channel. Type $start to start a game.")
     else:
         role = discord.utils.find(lambda r: r.name == 'stonk-admin', ctx.message.guild.roles)
         if role in ctx.author.roles:

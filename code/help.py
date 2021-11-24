@@ -20,11 +20,12 @@ async def halp(ctx,set1,set2):
         "$end, ends the current game playing in the channel. Can only be used by people with the 'stonk-admin' role",
         "$join, allows to join if there is a current game in the channel",
         "$buy [4-Letter Stock Symbol] [Quantity], buys the amount of specified stock(EX: $buy TSLA 50, buys 50 Tesla Stock)",
+        "$sell [4-Letter Stock Symbol] [Quantity], sells the amount of specified stock(EX: $sell TSLA 50, sells 50 Tesla Stock)",
         "$market [4-Letter Stock Symbol], returns a message giving the current market price of a stock(EX: $market TSLA, will give $1,137.06, as of 11/21/2021)",
         "$lb, gives the leaderboard of the Top 10 Traders according to net worth in the current game",
-        "$assets, returns the player's current assets, including stocks owned and net worth"
+        "$assets, returns the player's current assets, including stocks owned"
         ]
-        names = [["Start"],["End"],["Join"],["Buy","B"],["Market","M"],["Leaderboard","Lb"],["Assets"]]
+        names = [["Start"],["End"],["Join"],["Buy","B"],["Sell","S"],["Market","M"],["Leaderboard","Lb"],["Assets"]]
         for i in range(len(names)):
             if set2 == None:
                 help_emb.add_field(name=names[i][0],value=game_desc[i])
