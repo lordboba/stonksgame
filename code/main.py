@@ -9,13 +9,15 @@ from feedback import dev_fb
 from help import halp
 from dotenv import load_dotenv
 from typing import Optional
-from start import st, create_game
+from start import st, create_game, no_st
 from end import endG, shut_down
 from join import joined, add_user
 from assets import items
 from buy import afford, addAsset, remBuy
 from market import markP
 from sell import sold, sellEm, remS
+from game import playing
+from leaderboard import winnin
 from discord_slash import SlashCommand
 from discord_slash.utils.manage_components import create_button, create_actionrow
 from discord_slash.model import ButtonStyle
@@ -64,6 +66,7 @@ async def yea(ctx: ComponentContext):
 async def nou(ctx: ComponentContext):
     # await ctx.send()
     await ctx.edit_origin(content="Alright, looks like we're not starting a game here.",components=[])
+    await no_st(ctx)
 
 @client.command(name="end")
 async def end(ctx):
@@ -143,6 +146,17 @@ async def nosell(ctx: ComponentContext):
     await ctx.edit_origin(content="Looks like we're not selling these.",components=[])
     await remS(ctx)
 
+@client.command(name="game")
+async def game(ctx):
+    await playing(ctx)
+
+@client.command(name="leaderboard")
+async def leaderboard(ctx):
+    await winnin(ctx)
+
+@client.command(name="lb")
+async def lb(ctx):
+    await winnin(ctx)
 # print(os.environ["key"])
 TOKEN = os.environ["token"]
 client.run(TOKEN)
