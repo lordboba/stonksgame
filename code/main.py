@@ -157,6 +157,30 @@ async def leaderboard(ctx):
 @client.command(name="lb")
 async def lb(ctx):
     await winnin(ctx)
+
+@tasks.loop(hours=1)
+async def my_task():
+    #update leaderboard and check for completed games
+    return
+
+
+@my_task.before_loop
+async def before_my_task():
+    hour = 0
+    minute = 0
+    #print("hiafwefaweff")
+    await client.wait_until_ready()
+    #print("hiawefawfafafefdhiawewafahiwdheafefadwihafahidiedfdaifeafida")
+    now = dt.datetime.now()
+    #print(now)
+    future = dt.datetime(now.year, now.month, now.day, hour, minute)
+    # print(future)
+    if now.hour >= hour and now.minute > minute:
+        future += dt.timedelta(days=1)
+    print((future-now).seconds)
+    await asyncio.sleep((future-now).seconds)
+
 # print(os.environ["key"])
+my_task.start()
 TOKEN = os.environ["token"]
 client.run(TOKEN)
