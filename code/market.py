@@ -3,6 +3,7 @@ import aiofiles
 import asyncio
 from aiohttp import ClientSession
 import aiohttp
+import json
 async def markP(ctx, Stock, key):
     headers = {"X-Finnhub-Token" : f"{key}"}
     try:
@@ -19,3 +20,4 @@ async def markP(ctx, Stock, key):
             stock_emb = discord.Embed(title=f"{Stock} Stock Price")
             stock_emb.add_field(name="Current Price", value=f"${stock_info['c']}")
             await ctx.send(embed=stock_emb)
+

@@ -15,6 +15,7 @@ from join import joined, add_user
 from assets import items
 from buy import afford, addAsset, remBuy
 from market import markP
+from sell import sold, sellEm, remS
 from discord_slash import SlashCommand
 from discord_slash.utils.manage_components import create_button, create_actionrow
 from discord_slash.model import ButtonStyle
@@ -99,12 +100,12 @@ async def assets(ctx):
     await items(ctx)
 
 @client.command(name="buy")
-async def buy(ctx, Stock, Quantity):
-    await afford(ctx, Stock, Quantity, os.environ["key"])
+async def buy(ctx, Stock:Optional[str], Quantity:Optional[str]):
+    await afford(ctx,  os.environ["key"],Stock, Quantity)
 
 @client.command(name="b")
-async def b(ctx, Stock, Quantity):
-    await afford(ctx, Stock, Quantity, os.environ["key"])
+async def b(ctx, Stock:Optional[str], Quantity:Optional[str]):
+    await afford(ctx,  os.environ["key"],Stock, Quantity)
 
 @slash.component_callback()
 async def yebuy(ctx: ComponentContext):
@@ -121,6 +122,26 @@ async def nobuy(ctx: ComponentContext):
 @client.command(name="market")
 async def market(ctx, Stock):
     await markP(ctx, Stock, os.environ["key"])
+
+@client.command(name="sell")
+async def sell(ctx, Stock:Optional[str], Quant:Optional[str]):
+    await sold(ctx, Stock, Quant, os.environ["key"])
+
+@client.command(name="s")
+async def s(ctx, Stock:Optional[str], Quant:Optional[str]):
+    await sold(ctx, Stock, Quant, os.environ["key"])
+
+@slash.component_callback()
+async def yesell(ctx: ComponentContext):
+    await ctx.edit_origin(content="Stocks sold!", components=[])
+    # print("Squid game")
+    await sellEm(ctx)
+
+@slash.component_callback()
+async def nosell(ctx: ComponentContext):
+    # await ctx.send()
+    await ctx.edit_origin(content="Looks like we're not selling these.",components=[])
+    await remS(ctx)
 
 # print(os.environ["key"])
 TOKEN = os.environ["token"]
