@@ -19,4 +19,5 @@ async def items(ctx):
             item_emb.add_field(name="Cash",value=f"${currD['Cash']}")
             for key in currD["Stocks"]:
                 item_emb.add_field(name=key,value=currD["Stocks"][key])
+            item_emb.add_field(name="Net Worth",value=f"${currD['NetWorth']}(Note that this is updated every hour.)",inline=False)
             await ctx.send(embed=item_emb)

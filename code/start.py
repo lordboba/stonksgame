@@ -62,6 +62,7 @@ async def create_game(ctx):
         "Buying" : {},
         "Selling" : {}
     }
+    data["Games"].append(str(ctx.channel.id))
     # print(data)
     async with aiofiles.open("data.json",'w') as out:
         await out.write(json.dumps(data))

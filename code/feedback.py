@@ -7,8 +7,8 @@ async def dev_fb(ctx, client):
     
     embed = discord.Embed(title="Hello, and thanks for using the StonksGame Bot!")
     embed.add_field(name="How To Send Feedback", value="Please write what you want to send to the creator of this discord bot. Please be mindful of what you send. You have 5 minutes.")
-    dm_msg = await ctx.author.send("Hi!")
-    await dm_msg.channel.send(embed=embed)
+    dm_msg = await ctx.author.send(embed=embed)
+    # await dm_msg.channel.send(embed=embed)
     def check(m):
         return m.channel == dm_msg.channel and m.author != client.user
     try:

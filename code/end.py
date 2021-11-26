@@ -6,6 +6,7 @@ from discord_slash import SlashCommand
 from discord_slash.utils.manage_components import create_button, create_actionrow
 from discord_slash.model import ButtonStyle
 from discord_slash.context import ComponentContext
+import datetime as dt
 async def endG(ctx):
     async with aiofiles.open('data.json', mode='r') as f:
         contents = await f.read()

@@ -17,16 +17,20 @@ from buy import afford, addAsset, remBuy
 from market import markP
 from sell import sold, sellEm, remS
 from game import playing
-from leaderboard import winnin
+from leaderboard import winnin, upd, win2
 from discord_slash import SlashCommand
 from discord_slash.utils.manage_components import create_button, create_actionrow
 from discord_slash.model import ButtonStyle
 from discord_slash.context import ComponentContext
-
+import aiofiles
+import json
+from aiohttp import ClientSession
 
 # print("hi my name is bob")
 load_dotenv()
-client = commands.Bot(command_prefix='$', activity=discord.Game(name="Playing $help"))
+intents = discord.Intents.default()
+intents.members = True
+client = commands.Bot(command_prefix='$', activity=discord.Game(name="Playing $help"),intents=intents)
 slash = SlashCommand(client, sync_commands=True)
 # print(os.environ['VIRTUAL_ENV'])
 # print(os.environ.get("token"))
@@ -152,22 +156,49 @@ async def game(ctx):
 
 @client.command(name="leaderboard")
 async def leaderboard(ctx):
-    await winnin(ctx)
+    guild = client.get_guild(ctx.guild.id)
+    await winnin(ctx, guild)
 
 @client.command(name="lb")
 async def lb(ctx):
-    await winnin(ctx)
+    guild = client.get_guild(ctx.guild.id)
+    await winnin(ctx, guild)
 
 @tasks.loop(hours=1)
 async def my_task():
     #update leaderboard and check for completed games
-    return
+    await upd(os.environ["key"])
+    #now check for ending games
+    #ends game that run out of time
+    async with aiofiles.open('data.json', mode='r') as f:
+        contents = await f.read()
+    data = json.loads(contents)
+    rem = []
+    for chan in data["Games"]:
+        e_time = dt.datetime.strptime(data[chan]["EndTime"],"%m/%d/%Y, %H:%M")
+        now  = dt.datetime.now()
+        if now > e_time:
+            channel = await client.fetch_channel(chan)
+            await channel.send("Game Over! Here are the final results of the game. Congrats to the Winners!")
+            guild = client.get_guild(channel.guild.id)
+            await win2(chan,channel,guild)
+            rem.append(chan)
+    
+    #remove finished games
+    for chan in rem:
+        data.pop(chan)
+        data["Games"].remove(chan)
+
+    async with aiofiles.open("data.json",'w') as out:
+        await out.write(json.dumps(data))
+
+
 
 
 @my_task.before_loop
 async def before_my_task():
-    hour = 0
-    minute = 0
+    hour = 12
+    minute = 00
     #print("hiafwefaweff")
     await client.wait_until_ready()
     #print("hiawefawfafafefdhiawewafahiwdheafefadwihafahidiedfdaifeafida")
