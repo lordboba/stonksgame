@@ -194,7 +194,6 @@ async def my_task():
 
 
 
-
 @my_task.before_loop
 async def before_my_task():
     hour = 12
