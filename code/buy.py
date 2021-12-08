@@ -63,7 +63,7 @@ async def addAsset(ctx):
     id = str(ctx.author.id)
     info = data[chan]["Buying"][id]
     data[chan]["PlayerData"][id]["Cash"] = data[chan]["PlayerData"][id]["Cash"] - info["Price"]
-    if info["Stock"] in data[chan]["PlayerData"][id]:
+    if info["Stock"] in data[chan]["PlayerData"][id]["Stocks"]:
         data[chan]["PlayerData"][id]["Stocks"][info["Stock"]] = info["Quant"] + data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]
     else:
         data[chan]["PlayerData"][id]["Stocks"][info["Stock"]] = info["Quant"]

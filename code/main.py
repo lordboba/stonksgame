@@ -30,7 +30,8 @@ from aiohttp import ClientSession
 load_dotenv()
 intents = discord.Intents.default()
 intents.members = True
-client = commands.Bot(command_prefix='$', activity=discord.Game(name="Playing $help"),intents=intents)
+client = commands.Bot(command_prefix='t$', activity=discord.Game(name="Playing $help"),intents=intents)
+# client = commands.Bot(command_prefix='$', activity=discord.Game(name="Playing $help"),intents=intents)
 slash = SlashCommand(client, sync_commands=True)
 # print(os.environ['VIRTUAL_ENV'])
 # print(os.environ.get("token"))
@@ -213,4 +214,6 @@ async def before_my_task():
 # print(os.environ["key"])
 my_task.start()
 TOKEN = os.environ["token"]
-client.run(TOKEN)
+tst = os.environ["test"]
+client.run(tst)
+# client.run(TOKEN)

@@ -29,5 +29,6 @@ async def shut_down(ctx):
         contents = await f.read()
     data = json.loads(contents)
     data.pop(str(ctx.channel.id))
+    data["Games"].remove(str(ctx.channel.id))
     async with aiofiles.open("data.json",'w') as out:
         await out.write(json.dumps(data))
