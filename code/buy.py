@@ -63,10 +63,13 @@ async def addAsset(ctx):
     id = str(ctx.author.id)
     info = data[chan]["Buying"][id]
     data[chan]["PlayerData"][id]["Cash"] = data[chan]["PlayerData"][id]["Cash"] - info["Price"]
+    
     if info["Stock"] in data[chan]["PlayerData"][id]["Stocks"]:
-        data[chan]["PlayerData"][id]["Stocks"][info["Stock"]] = info["Quant"] + data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]
+        data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]["Num"] = info["Quant"] + data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]["Num"]
     else:
-        data[chan]["PlayerData"][id]["Stocks"][info["Stock"]] = info["Quant"]
+        data[chan]["PlayerData"][id]["Stocks"][info["Stock"]] = {}
+        data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]["Num"] = info["Quant"]
+        data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]["Init"] = info["Price"]/info["Quant"]
     data[chan]["Buying"].pop(id)
     async with aiofiles.open("data.json",'w') as out:
         await out.write(json.dumps(data))

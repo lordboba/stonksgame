@@ -33,7 +33,7 @@ async def upd(key):
         for p in data[chan]["Players"]:
             net = data[chan]["PlayerData"][p]["Cash"]
             for stonk in data[chan]["PlayerData"][p]["Stocks"]:
-                owned = (float)(data[chan]["PlayerData"][p]["Stocks"][stonk])
+                owned = (float)(data[chan]["PlayerData"][p]["Stocks"][stonk]["Num"])
                 if stonk in data["Cache"]:
                     net = net + data["Cache"][stonk] *owned
                 else:

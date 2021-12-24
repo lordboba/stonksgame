@@ -107,6 +107,10 @@ async def nojoin(ctx: ComponentContext):
 async def assets(ctx):
     await items(ctx)
 
+@client.command(name="a")
+async def a(ctx):
+    await items(ctx)
+
 @client.command(name="buy")
 async def buy(ctx, Stock:Optional[str], Quantity:Optional[str]):
     await afford(ctx,  os.environ["key"],Stock, Quantity)

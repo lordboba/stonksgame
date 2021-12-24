@@ -30,7 +30,7 @@ async def sold(ctx, Stock, Quant, key):
             else:
                 if str(ctx.author.id) in data[str(ctx.channel.id)]["Players"]:
                     if Stock in data[chan]["PlayerData"][id]["Stocks"]:
-                        if Quant > data[chan]["PlayerData"][id]["Stocks"][Stock]:
+                        if Quant > data[chan]["PlayerData"][id]["Stocks"][Stock]["Num"]:
                             await ctx.send(f"I'm sorry, you do not have that much {Stock} stock to sell. ")
                         else:
                             headers = {"X-Finnhub-Token" : f"{key}"}
@@ -63,8 +63,8 @@ async def sellEm(ctx):
     id = str(ctx.author.id)
     info = data[chan]["Selling"][id]
     data[chan]["PlayerData"][id]["Cash"] = data[chan]["PlayerData"][id]["Cash"] + info["Price"]
-    data[chan]["PlayerData"][id]["Stocks"][info["Stock"]] = data[chan]["PlayerData"][id]["Stocks"][info["Stock"]] - info["Quant"]
-    if data[chan]["PlayerData"][id]["Stocks"][info["Stock"]] == 0:
+    data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]["Num"] = data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]["Num"] - info["Quant"]
+    if data[chan]["PlayerData"][id]["Stocks"][info["Stock"]]["Num"] == 0:
         data[chan]["PlayerData"][id]["Stocks"].pop(info["Stock"])
     data[chan]["Selling"].pop(id)
     async with aiofiles.open("data.json",'w') as out:

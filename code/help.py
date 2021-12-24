@@ -7,6 +7,7 @@ async def halp(ctx,set1,set2):
     if type(set2) == str:
         set2 = set2.lower()
     help_emb = discord.Embed(title="Here are a list of commands for the StonksGame Bot.")
+    help_emb.add_field(name="StonksGame Bot",value="This is a bot where you simulate buying and selling stocks in real time.",inline=False)
     if set1 == None or set1 == "help":
         help_emb.add_field(name="Help",value="$help, gives a list of commands that the bot can do")
     if set1 == None:

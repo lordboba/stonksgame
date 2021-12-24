@@ -18,6 +18,7 @@ async def items(ctx):
             currD = data[channel]["PlayerData"][user]
             item_emb.add_field(name="Cash",value=f"${currD['Cash']}")
             for key in currD["Stocks"]:
-                item_emb.add_field(name=key,value=currD["Stocks"][key])
+                init = currD['Stocks'][key]['Init']
+                item_emb.add_field(name=key,value=f"{currD['Stocks'][key]['Num']}, Initial Buy Price ${init} {('',(':chart_with_upwards_trend:',':chart_with_downwards_trend:')[data['Cache'][key]>init])[key in data['Cache']]}")
             item_emb.add_field(name="Net Worth",value=f"${currD['NetWorth']}(Note that this is updated every hour.)",inline=False)
             await ctx.send(embed=item_emb)
